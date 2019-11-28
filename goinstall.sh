@@ -3,6 +3,10 @@ set -e
 
 VERSION="1.13.4"
 
+# https://storage.googleapis.com/golang
+# https://studygolang.com/dl/golang
+GOLANG_PACKAGE_DOWNLOAD_BASE_URL="https://studygolang.com/dl/golang"
+
 [ -z "$GOROOT" ] && GOROOT="$HOME/.go"
 [ -z "$GOPATH" ] && GOPATH="$HOME/go"
 
@@ -85,9 +89,9 @@ PACKAGE_NAME="go$VERSION.$PLATFORM.tar.gz"
 
 echo "Downloading $PACKAGE_NAME ..."
 if hash wget 2>/dev/null; then
-    wget https://storage.googleapis.com/golang/$PACKAGE_NAME -O /tmp/go.tar.gz
+    wget $GOLANG_PACKAGE_DOWNLOAD_BASE_URL/$PACKAGE_NAME -O /tmp/go.tar.gz
 else
-    curl -o /tmp/go.tar.gz https://storage.googleapis.com/golang/$PACKAGE_NAME
+    curl -o /tmp/go.tar.gz $GOLANG_PACKAGE_DOWNLOAD_BASE_URL/$PACKAGE_NAME
 fi
 
 if [ $? -ne 0 ]; then
